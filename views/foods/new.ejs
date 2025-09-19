@@ -8,12 +8,12 @@
 <body>
   <h1>Add Food Item</h1>
 
-  <form action="/users/<%= user._Id %>/foods" method="POST">
+  <form action="/users/<%= user._id %>/foods" method="POST">
     <label for="name">Food Name:</label>
     <input type="text" name="name" id="name" required />
     <button type="submit">Add</button>
   </form>
 
-  <a href="/users/<%= user._Id %>">Back to Pantry</a>
+  <a href="/users/<%= user._id %>">Back to Pantry</a>
 </body>
 </html>
