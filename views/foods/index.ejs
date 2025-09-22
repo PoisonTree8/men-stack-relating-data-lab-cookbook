@@ -13,16 +13,15 @@
     
      <% if (pantry && pantry.length) { %>
      <ul>
-    <% pantry.forEach(function(item){ %>
+    <% pantry.forEach(function(food){ %>
      <li>
-        <%= item.name %>
+        <%= food.name %>
+         <a href="/users/<%= user._id %>/foods/<%= food._id %>/edit">Edit</a>
          <form 
-              action="/users/<%= user._id %>/foods/<%= item._id %>?_method=DELETE" 
+              action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE" 
               method="POST" >
               <button type="submit">Delete</button>
             </form>
-            
-    
     </li>
     <% }) %>
      </ul>
