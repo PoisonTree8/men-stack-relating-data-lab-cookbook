@@ -31,4 +31,26 @@ try {
     res.redirect('/');
 }
 });
+
+router.delete('/:foodId', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    const food = currentUser.pantry.id(req.params.foodId);
+
+    if (food) {
+      console.log('Food Found');
+      food.deleteOne();
+      await currentUser.save();
+      res.redirect(`/users/${req.params.userId}/foods`);
+    } else {
+      console.log('Food not found');
+      res.redirect(`/users/${req.params.userId}/foods`);
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+}
+});
+
+
 module.exports = router;
