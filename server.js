@@ -1,4 +1,3 @@
-// server.js
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -14,10 +13,10 @@ const MongoStore = require("connect-mongo");
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 
-// Controllers
 const authController = require('./controllers/auth.js');
 const foodsController = require('./controllers/foods.js');
-// Set the port from environment variable or default to 3000
+const usersController = require('./controllers/users.js');
+
 const port = process.env.PORT ? process.env.PORT : '3000';
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -47,18 +46,18 @@ app.use(
 app.use(passUserToView);
 
 // PUBLIC
-app.get('/', (req, res) => {
-  res.render('index.ejs');
+app.get('/', async (req, res) => {
+  const User = require('./models/user.js');
+  const users = await User.find({});
+  res.render('index.ejs', { users });
 });
 
 app.use('/auth', authController);
 app.use(isSignedIn);
 app.use('/users/:userId/foods', foodsController);
-// PROTECTED
+app.use('/users', usersController);
 
-app.get("/vip-lounge", isSignedIn, (req, res) => {
-    res.send(`Welcome to the party ${req.session.user.username}.`);
-});
+
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Community</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <h1>Explore Our Community</h1>
+ 
+
+  <% if (!users || users.length === 0) { %>
+    <p>No users yet.</p>
+  <% } else { %>
+  <% users.forEach(u => { %>
+    <div class="user-pantry">
+    <h2><%= u.username %></h2>
+    <% if (u.pantry && u.pantry.length > 0) { %>
+
+    <ul>
+    <% u.pantry.forEach(pantry => { %>
+
+        <li>
+        <strong>name:</strong> <%= food.name %> |
+       
+        
+        <% } %>
+        </li>
+
+    <% }) %>
+     </ul>
+
+    <% } else { %>
+    <p>No pantry yet.</p>
+    <% } %>
+
+      </div>
+    <% }) %>
+    <% } %>
+</body>
+</html>
+

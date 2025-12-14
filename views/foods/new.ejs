@@ -1,19 +1,17 @@
-<!-- views/foods/new.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Add Food</title>
+  <title>Add New Item</title>
 </head>
 <body>
-  <h1>Add Food </h1>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Add New Pantry Item</h1>
 
   <form action="/users/<%= user._id %>/foods" method="POST">
     <label for="name">Food Name:</label>
-    <input type="text" name="name" id="name" required />
-    <button type="submit">Add</button>
+    <input type="text" name="name" required>
+    <button type="submit">Save</button>
   </form>
-
-  <a href="/users/<%= user._id %>">Back to Pantry</a>
 </body>
 </html>
